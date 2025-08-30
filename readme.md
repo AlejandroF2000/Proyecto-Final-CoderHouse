@@ -1,36 +1,27 @@
-# Proyecto Final - VĀLI Ecommerce 🛍️
+Proyecto Final – VĀLI Ecommerce 🛍️
 
-Este es el proyecto final del curso de JavaScript (Coderhouse).  
-Consiste en un **Ecommerce funcional** para la marca ficticia **VĀLI**, con catálogo de productos, carrito de compras persistente y proceso de compra simulado.
+Este proyecto corresponde a la entrega final de JavaScript (Coderhouse).
+Se trata de un Ecommerce funcional con catálogo de productos dinámico y carrito persistente.
 
----
+✅ Correcciones aplicadas según devolución
 
-## 📌 Funcionalidades principales
+Carga asíncrona de datos: los productos se obtienen mediante fetch() desde un JSON embebido (data:URL).
 
-- **Catálogo de productos** con imágenes, precios y botón “+” para agregar al carrito.
-- **Carrito lateral** que se abre con un botón de bolsa de compras.
-- **Badge dinámico** que muestra la cantidad de ítems en el carrito.
-- **Persistencia en LocalStorage**: los productos agregados se mantienen al recargar la página.
-- **Controles del carrito**:
-  - Aumentar / disminuir cantidad de un producto.
-  - Eliminar producto.
-  - Vaciar carrito completo con confirmación.
-- **Proceso de compra simulado** con formulario y validación usando **SweetAlert2**.
-- **Formato de moneda** adaptado a UYU (pesos uruguayos).
-- **Accesibilidad básica** (`aria-label`, `aria-live`).
+Imágenes mejoradas: se asignaron fotos de las secciones Colecciones e Inicio para evitar repetición de imágenes.
 
----
+Interactividad avanzada:
 
-## 🛠️ Tecnologías utilizadas
+Carrito lateral con botones (+, −, eliminar, vaciar).
 
-- **HTML5** → Estructura del sitio y contenido.
-- **CSS3 + Bootstrap 4** → Estilos y grilla responsive.
-- **JavaScript (ES6+)** → Lógica de negocio y manipulación del DOM.
-- **SweetAlert2** → Alertas y formularios interactivos.
-- **LocalStorage** → Guardado persistente del carrito.
-- **Intl.NumberFormat** → Formato de moneda local.
+Persistencia en LocalStorage (los ítems se mantienen al recargar).
 
----
+Proceso de compra simulado con SweetAlert2 y validación de campos.
+
+Manejo de errores: try/catch con alerta de error si falla la carga de productos.
+
+Accesibilidad básica: uso de aria-live en el badge y cantidades del carrito.
+
+Diseño responsivo: panel del carrito con scroll interno para listas largas y adaptación a mobile.
 
 ## 📂 Estructura del proyecto
 
@@ -67,3 +58,15 @@ vali-uy/
 │
 ├── index.html
 └── readme.md
+
+🚀Tecnologias
+
+JavaScript (ES6+)
+
+SweetAlert2 (alertas y formularios)
+
+LocalStorage
+
+Bootstrap 4
+
+CSS3 (animaciones y responsividad)

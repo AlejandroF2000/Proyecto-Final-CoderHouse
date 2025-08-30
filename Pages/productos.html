@@ -1,253 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Explora la variedad de productos que VĀLI tiene para ofrecer, diseñados para todos los estilos.">
-    <meta name="keywords" content="productos, VĀLI, moda, ropa, estilo, calidad">
-    <meta property="og:title" content="Productos | VĀLI">
-    <meta property="og:description" content="Encuentra las prendas que mejor se adaptan a tu estilo en nuestra colección de productos.">
-    <meta property="og:image" content="../images/productos/vali-productos-portada.jpg">
-    <meta property="og:url" content="https://vali-uy.netlify.app/pages/productos">
-    <title>Productos | VĀLI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Catálogo de productos VĀLI" />
+  <title>Productos | VĀLI</title>
 
-    <!-- Estilos del sitio -->
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
 
-    <!-- Estilos mínimos SOLO para precio/+, botón flotante y carrito lateral -->
-    <style>
-      /* --- Precio y botón + por fuera de la imagen --- */
-      .price-pill {
-        display: inline-block;
-        background: #fff;
-        color: #000;
-        border: 1px solid #ddd;
-        border-radius: 999px;
-        padding: .25rem .6rem;
-        font-weight: 700;
-        box-shadow: 0 3px 10px rgba(0,0,0,.12);
-        margin-right: .5rem;
-      }
-      .add-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: #fff;
-        color: #000;
-        border: 1px solid #ddd;
-        font-weight: 800;
-        font-size: 1.1rem;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,.15);
-        transition: transform .15s ease, background .15s ease;
-      }
-      .add-btn:hover { transform: scale(1.06); }
-      .prod-actions {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: .5rem;
-        margin-top: .6rem;
-        margin-bottom: 1.2rem;
-      }
-
-      /* --- Botón flotante del carrito con icono de bolsa --- */
-      #btnCarrito {
-        position: fixed;
-        right: 16px;
-        bottom: 16px;
-        z-index: 9998;
-        display: inline-flex;
-        align-items: center;
-        gap: .5rem;
-        background: #111;
-        color: #fff;
-        border: none;
-        border-radius: 999px;
-        padding: .65rem .9rem;
-        cursor: pointer;
-        box-shadow: 0 10px 25px rgba(0,0,0,.18);
-      }
-      #btnCarrito svg { width: 22px; height: 22px; }
-      #badge {
-        background: #fff;
-        color: #111;
-        border-radius: 999px;
-        padding: .15rem .5rem;
-        font-size: .85rem;
-        font-weight: 700;
-      }
-
-      /* --- Panel lateral del carrito --- */
-      #carrito {
-        position: fixed; top: 0; right: -420px; width: 380px; height: 100vh;
-        background: #fff; box-shadow: -2px 0 14px rgba(0,0,0,.16);
-        transition: right .25s ease; z-index: 9999; display: flex; flex-direction: column;
-      }
-      #carrito.abierto { right: 0; }
-      #carrito header, #carrito footer { padding: 1rem; border-bottom: 1px solid #eee; }
-      #carrito header {
-        display:flex; justify-content: space-between; align-items:center;
-      }
-      #carrito .contenido { padding: 1rem; overflow:auto; flex:1; }
-      #carrito table { width:100%; border-collapse: collapse; }
-      #carrito th, #carrito td { padding: .5rem; border-bottom: 1px solid #f0f0f0; text-align:left; }
-      #carrito .acciones { display:flex; gap:.35rem; align-items:center; }
-      #carrito .total { font-weight: 700; font-size: 1.1rem; display:flex; justify-content: space-between; padding:.5rem 0; }
-
-      .btn-min { border:1px solid #ddd; background:#f8f8f8; padding:.25rem .5rem; border-radius:8px; cursor:pointer; }
-      .btn-min:hover { background:#eee; }
-      .btn-primary-min { background:#111; color:#fff; border:none; padding:.45rem .7rem; border-radius:8px; cursor:pointer; }
-
-      @media (max-width:480px){
-        #carrito{ width: 100%; }
-      }
-    </style>
+  <!-- SweetAlert2 -->
+  <script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <!-- Encabezado con logo -->
-    <header class="d-flex justify-content-between align-items-center p-4 bg-white border-bottom">
-        <img src="../images/vali-logo/vali-logo.png" alt="Logo de la empresa" class="logo img-fluid">
-    </header>
-
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Pages/productos.html">Productos</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Pages/colecciones.html">Colecciones</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Pages/sobre_nosotros.html">Sobre Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="../Pages/contactanos.html">Contáctanos</a></li>
-      </ul>
-    </nav>
-
-    <!-- Sección principal -->
-    <main class="container mt-4">
-        <!-- Portada -->
-        <section class="portada">
-            <img src="../images/Productos/vali-productos-portada.jpg" alt="Portada de Productos" class="img-fluid">
-        </section>
-
-        <!-- Productos -->
-        <section class="row mt-4">
-            <!-- Camisas -->
-            <div class="col-12 col-md-3 text-center">
-                <p class="font-weight-bold">Camisas</p>
-                <img src="../images/Productos/vali-productos-camisas.jpg" alt="Mostrando producto productos camisas" class="img-fluid">
-                <div class="prod-actions">
-                  <span class="price-pill">$ 1.890</span>
-                  <button class="add-btn"
-                          data-id="cam-01"
-                          data-nombre="Camisa Clásica"
-                          data-precio="1890"
-                          data-img="../images/Productos/vali-productos-camisas.jpg"
-                          data-cat="Camisas"
-                          aria-label="Agregar Camisa al carrito">+</button>
-                </div>
-            </div>
-
-            <!-- Sobrecamisas -->
-            <div class="col-12 col-md-3 text-center">
-                <p class="font-weight-bold">Sobrecamisas</p>
-                <img src="../images/Productos/vali-productos-sobrecamisas.jpg" alt="Mostrando producto productos sobrecamisas" class="img-fluid">
-                <div class="prod-actions">
-                  <span class="price-pill">$ 2.490</span>
-                  <button class="add-btn"
-                          data-id="sob-01"
-                          data-nombre="Sobrecamisa Oversize"
-                          data-precio="2490"
-                          data-img="../images/Productos/vali-productos-sobrecamisas.jpg"
-                          data-cat="Sobrecamisas"
-                          aria-label="Agregar Sobrecamisa al carrito">+</button>
-                </div>
-            </div>
-
-            <!-- Vestidos -->
-            <div class="col-12 col-md-3 text-center">
-                <p class="font-weight-bold">Vestidos</p>
-                <img src="../images/Productos/vali-productos-vestidos.jpg" alt="Mostrando producto productos vestidos" class="img-fluid">
-                <div class="prod-actions">
-                  <span class="price-pill">$ 3.290</span>
-                  <button class="add-btn"
-                          data-id="ves-01"
-                          data-nombre="Vestido Midi"
-                          data-precio="3290"
-                          data-img="../images/Productos/vali-productos-vestidos.jpg"
-                          data-cat="Vestidos"
-                          aria-label="Agregar Vestido al carrito">+</button>
-                </div>
-            </div>
-
-            <!-- Chalecos y Sacos -->
-            <div class="col-12 col-md-3 text-center">
-                <p class="font-weight-bold">Chalecos y Sacos</p>
-                <img src="../images/Productos/vali-productos-chalecosycamisas.jpg" alt="Mostrando producto chalecos y sacos" class="img-fluid">
-                <div class="prod-actions">
-                  <span class="price-pill">$ 2.790</span>
-                  <button class="add-btn"
-                          data-id="cha-01"
-                          data-nombre="Saco Knit"
-                          data-precio="2790"
-                          data-img="../images/Productos/vali-productos-chalecosycamisas.jpg"
-                          data-cat="Chalecos y Sacos"
-                          aria-label="Agregar Saco al carrito">+</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-center p-3 bg-light mt-5">2024© Todos Los Derechos Reservados</footer>
-
-    <!-- Botón flotante del carrito con ICONO de bolsa -->
-    <button id="btnCarrito" aria-label="Abrir carrito">
-      <!-- Icono bolsa de compras (SVG) -->
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M6 8h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 8Z" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M9 8V6a3 3 0 1 1 6 0v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="10" cy="11" r="1" fill="currentColor"/>
-        <circle cx="14" cy="11" r="1" fill="currentColor"/>
-      </svg>
-      <span>Carrito</span>
-      <span id="badge">0</span>
+  <!-- Header -->
+  <header class="d-flex justify-content-between align-items-center p-4 bg-white border-bottom">
+    <img src="../images/vali-logo/vali-logo.png" alt="Logo de VĀLI" class="logo img-fluid" />
+    <button id="btnCarrito" class="btn btn-primary">
+      🛍️ <span class="badge badge-light" id="badge">0</span>
     </button>
+  </header>
 
-    <!-- Panel lateral del carrito -->
-    <aside id="carrito" aria-hidden="true">
-      <header>
-        <strong>Tu carrito</strong>
-        <button id="cerrarCarrito" class="btn-min" aria-label="Cerrar carrito">✕</button>
-      </header>
-      <div class="contenido">
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Cant.</th>
-              <th>Precio</th>
-            </tr>
-          </thead>
-          <tbody id="carritoBody"><!-- filas generadas desde JS --></tbody>
-        </table>
-        <div class="total">
-          <span>Total</span>
-          <span id="total">$ 0</span>
+  <!-- Nav -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link active" href="./productos.html">Productos</a></li>
+      <li class="nav-item"><a class="nav-link" href="./colecciones.html">Colecciones</a></li>
+      <li class="nav-item"><a class="nav-link" href="./sobre_nosotros.html">Sobre Nosotros</a></li>
+      <li class="nav-item"><a class="nav-link" href="./contactanos.html">Contáctanos</a></li>
+    </ul>
+  </nav>
+
+  <main class="container my-4">
+    <!-- Barra de búsqueda/filtros -->
+    <section class="mb-3">
+      <div class="form-row">
+        <div class="col-12 col-md-6 mb-2">
+          <input id="busqueda" class="form-control" placeholder="Buscar por nombre o descripción..." aria-label="Buscar productos" />
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+          <select id="filtroCat" class="form-control" aria-label="Filtrar por categoría">
+            <option value="">Todas</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3 mb-2">
+          <select id="orden" class="form-control" aria-label="Ordenar productos">
+            <option value="">Ordenar…</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+            <option value="nombre-asc">Nombre: A → Z</option>
+            <option value="nombre-desc">Nombre: Z → A</option>
+          </select>
         </div>
       </div>
-      <footer>
-        <button id="vaciar" class="btn-min">Vaciar</button>
-        <button id="comprar" class="btn-primary-min">Finalizar compra</button>
-      </footer>
-    </aside>
+    </section>
 
-    <!-- Librería UI -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Tu lógica del carrito (recuerda: ../js/app-productos.js) -->
-    <script src="/js/main.js" defer></script>
+  <!-- Contenedor vacío: el JS mete acá las cards -->
+  <section class="row" id="gridProductos" aria-live="polite"></section>
+</main>
+
+
+    <!-- GRID: acá se insertan las cards con fotos -->
+    <section class="row" id="gridProductos" aria-live="polite"></section>
+  </main>
+
+  <!-- Carrito -->
+  <aside id="carrito" class="carrito-panel" aria-hidden="true">
+    <div class="carrito-header d-flex justify-content-between align-items-center p-3 border-bottom">
+      <h5 class="mb-0">Tu carrito</h5>
+      <button id="cerrarCarrito" class="btn btn-secondary">Cerrar</button>
+    </div>
+    <div class="carrito-body p-3">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th style="width: 170px;">Acciones</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="carritoBody">
+          <tr><td colspan="3"><em>Tu carrito está vacío.</em></td></tr>
+        </tbody>
+      </table>
+      <div class="d-flex justify-content-between align-items-center">
+        <strong>Total:</strong>
+        <span id="total">$ 0</span>
+      </div>
+    </div>
+    <div class="carrito-footer p-3 border-top d-flex">
+      <button id="vaciar" class="btn btn-secondary mr-2">Vaciar</button>
+      <button id="comprar" class="btn btn-primary">Comprar</button>
+    </div>
+  </aside>
+
+  <!-- Estilos rápidos para el carrito -->
+  <style>
+    .carrito-panel{
+      position:fixed; top:0; right:0; height:100vh; width:380px;
+      background:#fff; border-left:1px solid #eee; transform:translateX(100%);
+      transition:transform .25s ease; z-index:1040; display:flex; flex-direction:column;
+    }
+    .carrito-panel.abierto{ transform:translateX(0); }
+    .btn-min{ padding:.25rem .5rem; }
+  </style>
+
+  <!-- Tu JS -->
+  <script defer src="../js/main.js"></script>
 </body>
 </html>
